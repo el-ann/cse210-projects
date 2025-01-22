@@ -30,7 +30,7 @@ public class Journal
         {
             foreach (var entry in entries)
             {
-                writer.WriteLine($"{entry.Date}|{entry.PromptText}|{entry.EntryText}|{entry.Mood}|{entry.Location}");
+                writer.WriteLine($"{entry._date}|{entry._promptText}|{entry._entryText}|{entry._mood}|{entry._location}");
             }
         }
     }

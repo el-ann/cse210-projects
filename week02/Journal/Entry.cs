@@ -2,26 +2,26 @@ using System;
 
 public class Entry
 {
-    public string Date { get; private set; }
-    public string PromptText { get; private set; }
-    public string EntryText { get; private set; }
-    public string Mood { get; private set; }
-    public string Location { get; private set; }
+    public string _date;
+    public string _promptText;
+    public string _entryText;
+    public string _mood;
+    public string _location;
 
     public Entry(string date, string promptText, string entryText, string mood, string location)
     {
-        Date = date;
-        PromptText = promptText;
-        EntryText = entryText;
-        Mood = mood;
-        Location = location;
+        _date = date;
+        _promptText = promptText;
+        _entryText = entryText;
+        _mood = mood;
+        _location = location;
     }
 
     public void Display()
     {
-        Console.WriteLine($"{Date} - {PromptText}");
-        Console.WriteLine($"{EntryText}");
-        Console.WriteLine($"Mood: {Mood}");
-        Console.WriteLine($"Location: {Location}");
+        Console.WriteLine($"{_date} - {_promptText}");
+        Console.WriteLine($"{_entryText}");
+        Console.WriteLine($"Mood: {_mood}");
+        Console.WriteLine($"Location: {_location}");
     }
 }
