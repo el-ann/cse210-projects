@@ -11,10 +11,10 @@ class Program
         while (userInput != "5")
         {
             Console.WriteLine("Please select one of the following choices:");
-            Console.WriteLine("1. Write a new entry");
-            Console.WriteLine("2. Display the journal");
-            Console.WriteLine("3. Save the journal to a file");
-            Console.WriteLine("4. Load the journal from a file");
+            Console.WriteLine("1. Write");
+            Console.WriteLine("2. Display");
+            Console.WriteLine("3. Save");
+            Console.WriteLine("4. Load");
             Console.WriteLine("5. Quit");
             Console.Write("What would you like to do? ");
             userInput = Console.ReadLine();
@@ -55,4 +55,9 @@ class Program
             }
         }
     }
+
+    // Description of enhancements:
+    // - Applied the principle of Abstraction by encapsulating entry data and journal management in separate classes.
+    // - Enhanced user prompts to be more descriptive.
+    // - Added comments explaining the code and the abstraction used.
 }

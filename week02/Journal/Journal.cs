@@ -1,56 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+
 public class Journal
 {
-    public List<Entry> _entries;
+    private List<Entry> entries;
+
+    public Journal()
+    {
+        entries = new List<Entry>();
+    }
 
     public void AddEntry(Entry newEntry)
     {
-        _entries.Add(newEntry);
-    }  
+        entries.Add(newEntry);
+    }
 
     public void DisplayAll()
     {
-       foreach (var entry in _entries)
-       {
-           entry.Display();
-       }
+        foreach (var entry in entries)
+        {
+            entry.Display();
+        }
     }
 
-    public void SaveToFile(string file)
+    public void SaveToFile(string filename)
     {
-        using (StreamWriter writer = new StreamWriter(file))
+        using (StreamWriter writer = new StreamWriter(filename))
         {
-            foreach (var entry in _entries)
+            foreach (var entry in entries)
             {
-                writer.WriteLine(entry._date);
-                writer.WriteLine(entry._promptText);
-                writer.WriteLine(entry._entryText);
-                writer.WriteLine(entry._mood);
-                writer.WriteLine(entry._location);
+                writer.WriteLine($"{entry.Date}|{entry.PromptText}|{entry.EntryText}|{entry.Mood}|{entry.Location}");
             }
         }
     }
 
-    public void LoadFromFile(string file)
+    public void LoadFromFile(string filename)
     {
-        _entries.Clear();
-        using (StreamReader reader = new StreamReader(file))
+        entries.Clear();
+        using (StreamReader reader = new StreamReader(filename))
         {
             string line;
             while ((line = reader.ReadLine()) != null)
             {
-                var parts = line.Split(new string[] {"\",\""}, StringSplitOptions.None);
+                string[] parts = line.Split('|');
                 if (parts.Length == 5)
                 {
                     string date = parts[0].Trim('"');
-                    string promptText = parts[1].Trim('"');
-                    string entryText = parts[2].Trim('"');
-                    string mood = parts[3].Trim('"');
-                    string location = parts[4].Trim('"');
+                    string promptText = parts[1].Replace("|", "~").Trim('"');
+                    string entryText = parts[2].Replace("|", "~").Trim('"');
+                    string mood = parts[3].Replace("|", "~").Trim('"');
+                    string location = parts[4].Replace("|", "~").Trim('"');
                     Entry newEntry = new Entry(date, promptText, entryText, mood, location);
-                    _entries.Add(newEntry);
+                    entries.Add(newEntry);
                 }
             }
         }
     }
-
 }
