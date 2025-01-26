@@ -14,7 +14,7 @@ public class Word
         isHidden = true;
     }
 
-    public void ShowWord()
+    public void RevealWord()
     {
         isHidden = false;
     }

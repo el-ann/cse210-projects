@@ -18,8 +18,23 @@ public class Scripture
         Random random = new Random();
         for (int i = 0; i < count; i++)
         {
-            int index = random.Next(words.Count);
-            words[index].HideWord();
+            while (true)
+            {
+                int index = random.Next(words.Count);
+                if (!words[index].IsHidden())
+                {
+                    words[index].HideWord();
+                    break;
+                }
+            }
+        }
+    }
+
+    public void RevealScripture()
+    {
+        foreach (var word in words)
+        {
+            word.RevealWord();
         }
     }
 
@@ -27,9 +42,21 @@ public class Scripture
     {
         foreach (var word in words)
         {
-            Console.Write(word.IsHidden() ? "_____" : word.GetText());
+            Console.Write(word.IsHidden() ? new string('_', word.GetText().Length) : word.GetText());
             Console.Write(" ");
         }
         Console.WriteLine($"\n\nReference: {reference.GetDisplayText()}");
+    }
+
+    public bool AllWordsHidden()
+    {
+        foreach (var word in words)
+        {
+            if (!word.IsHidden())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

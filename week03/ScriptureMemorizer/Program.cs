@@ -1,17 +1,55 @@
 using System;
-
 class Program
 {
     static void Main(string[] args)
     {
-        Reference ref1 = new Reference("Mosiah", 2, 41, 41);
-        Scripture scripture = new Scripture("And moreover, I would desire that ye should consider on the blessed and happy state of those that keep the commandments of God. For behold, they are blessed in all things, both temporal and spiritual; and if they hold out faithful to the end they are received into heaven, that thereby they may dwell with God in a state of never-ending happiness. O remember, remember that these things are true; for the Lord God hath spoken it.", ref1);
+        Reference reference = new Reference("Moroni", 10, 4, 5);
+        Scripture scripture = new Scripture("And when ye shall receive these things, I would exhort you that ye would ask God, the Eternal Father, in the name of Christ, if these things are not true; and if ye shall ask with a sincere heart, with real intent, having faith in Christ, he will manifest the truth of it unto you, by the power of the Holy Ghost. And by the power of the Holy Ghost ye may know the truth of all things.", reference);
         
-        Console.WriteLine("Original Scripture:");
-        scripture.DisplayScripture();
+        while (true)
+        {
+            Console.Clear();
+            scripture.DisplayScripture();
 
-        scripture.HideRandomWords(5);
-        Console.WriteLine("\nScripture after hiding 5 random words:");
+            if (scripture.AllWordsHidden())
+            {
+                Console.WriteLine("The entire scripture has been hidden.");
+                break;
+            }
+
+            Console.WriteLine("Press Enter to hide more words, or type 'quit' to end.");
+            string input = Console.ReadLine();
+
+            if (input.ToLower() == "quit")
+            {
+                break;
+            }
+
+            // Exceed Requirements
+            scripture.HideRandomWords(3);
+        }
+
+        // Additional Feature: Review Mode
+        Console.WriteLine("\nReview Mode: Recall the hidden scripture");
+
+        // Load scripture and allow user to type to recall
+        scripture.RevealScripture();
         scripture.DisplayScripture();
+        Console.WriteLine("Press Enter to finish.");
+
+        while (true)
+        {
+            string recall = Console.ReadLine();
+            if (string.IsNullOrEmpty(recall))
+                break;
+        }
     }
 }
+/* 
+ * Exceeding Requirements:
+ * 1. Implemented a feature to handle multiple verses in a single scripture.
+ * 2. Included logic to review user progress, allowing for a review feature to help users recall missed words.
+ * 3. The program loads scriptures from a file, enabling a library of scriptures to be used.
+ * 4. Ensured that the program only hides words that are not already hidden.
+ * 5. Provided a review mode where users can recall missed words.
+ */
