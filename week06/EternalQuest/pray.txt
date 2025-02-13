@@ -1,0 +1,5 @@
+0
+SimpleGoal
+Pray
+Say my daily prayers
+5
